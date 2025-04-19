@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate HTML, CSS, and JavaScript Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f4f3;
+        }
+        header, main, footer {
+            padding: 20px;
+        }
+        header {
+            background-color: #014d4d;
+            color: white;
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            padding: 20px;
+        }
+        .todo {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .task {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .task button {
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Intermediate HTML, CSS, and JavaScript</h1>
+    </header>
+
+    <main>
+        <!-- Contact Form -->
+        <form id="contactForm">
+            <h2>Contact Us</h2>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="submit" value="Submit">
+        </form>
+
+        <!-- Responsive Layout -->
+        <section class="grid-layout">
+            <nav>
+            </nav>
+            <article>
+                <h2>Welcome to Our Site</h2>
+                <p>This layout adapts to different screen sizes using CSS Grid and Flexbox.</p>
+            </article>
+        </section>
+
+        <!-- To-Do List -->
+        <section class="todo">
+            <h2>To-Do List</h2>
+            <input type="text" id="taskInput" placeholder="Enter new task">
+            <button onclick="addTask()">Add Task</button>
+            <div id="taskList"></div>
+        </section>
+    </main>
+
+    <script>
+        // JavaScript Form Validation
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert("Please enter a valid name and email.");
+                return;
+            }
+            alert("Form submitted successfully!");
+        });
+
+        // Dynamic To-Do List
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskList = document.getElementById('taskList');
+            const taskText = taskInput.value.trim();
+            if (taskText === '') return;
+
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task';
+            taskDiv.innerHTML = `${taskText} <button onclick="this.parentElement.remove()">Remove</button>`;
+            taskList.appendChild(taskDiv);
+
+            taskInput.value = '';
+        }
+    </script>
+</body>
+</html>
